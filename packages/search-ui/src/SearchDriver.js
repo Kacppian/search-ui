@@ -170,14 +170,9 @@ export default class SearchDriver {
       ...searchParameters
     };
 
-    // We'll trigger an initial search if initial parameters contain
-    // a search term or filters, otherwise, we'll just save their selections
-    // in state as initial values.
-    if (
-      searchParameters.searchTerm ||
-      searchParameters.filters.length > 0 ||
-      shouldSearchOnInitialLoad
-    ) {
+    // We'll trigger an initial search if shouldSearchOnInitialLoad is set to true.
+    // Otherwise, we'll just save their selections in state as initial values.
+    if (shouldSearchOnInitialLoad) {
       this._updateSearchResults(searchParameters);
     }
   }
