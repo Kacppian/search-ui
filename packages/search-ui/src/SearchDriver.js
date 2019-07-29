@@ -92,7 +92,8 @@ export default class SearchDriver {
     trackUrlState = true,
     urlPushDebounceLength = 500,
     hasA11yNotifications = false,
-    a11yNotificationMessages = {}
+    a11yNotificationMessages = {},
+    shouldSearchOnInitialLoad = true
   }) {
     this.actions = Object.entries(actions).reduce(
       (acc, [actionName, action]) => {
@@ -172,7 +173,11 @@ export default class SearchDriver {
     // We'll trigger an initial search if initial parameters contain
     // a search term or filters, otherwise, we'll just save their selections
     // in state as initial values.
-    if (searchParameters.searchTerm || searchParameters.filters.length > 0) {
+    if (
+      searchParameters.searchTerm ||
+      searchParameters.filters.length > 0 ||
+      shouldSearchOnInitialLoad
+    ) {
       this._updateSearchResults(searchParameters);
     }
   }
